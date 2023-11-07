@@ -79,8 +79,8 @@ jobs:
           curl -L https://go.dev/dl/go1.19.linux-arm64.tar.gz | sudo tar -zx -C /usr/local
           PATH=$PATH:/usr/local/go/bin:/root/go/bin
           GOPROXY=direct
-          sam build --template ${SAM_TEMPLATE} --use-container
-
+          sam build --template ${SAM_TEMPLATE}
+          
       - name: Assume the testing pipeline user role
         uses: aws-actions/configure-aws-credentials@v1-node16
         with:
@@ -117,7 +117,7 @@ jobs:
           curl -L https://go.dev/dl/go1.19.linux-arm64.tar.gz | sudo tar -zx -C /usr/local
           PATH=$PATH:/usr/local/go/bin:/root/go/bin
           GOPROXY=direct
-          sam build --template ${SAM_TEMPLATE} --use-container
+          sam build --template ${SAM_TEMPLATE}
 
 
       - name: Assume the testing pipeline user role
