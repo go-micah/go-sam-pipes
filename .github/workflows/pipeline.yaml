@@ -19,9 +19,9 @@ env:
   TESTING_ARTIFACTS_BUCKET: ${{ vars.TESTING_ARTIFACTS_BUCKET }}
   TESTING_REGION: us-east-1
   PROD_STACK_NAME: go-sam-pipe-prod
-  PROD_PIPELINE_EXECUTION_ROLE: $ {{ vars.PROD_PIPELINE_EXECUTION_ROLE }}
-  PROD_CLOUDFORMATION_EXECUTION_ROLE: $ {{ vars.PROD_CLOUDFORMATION_EXECUTION_ROLE }}
-  PROD_ARTIFACTS_BUCKET: $ {{ vars.PROD_ARTIFACTS_BUCKET }}
+  PROD_PIPELINE_EXECUTION_ROLE: ${{ vars.PROD_PIPELINE_EXECUTION_ROLE }}
+  PROD_CLOUDFORMATION_EXECUTION_ROLE: ${{ vars.PROD_CLOUDFORMATION_EXECUTION_ROLE }}
+  PROD_ARTIFACTS_BUCKET: ${{ vars.PROD_ARTIFACTS_BUCKET }}
   PROD_REGION: us-east-1
 
 jobs:
@@ -80,7 +80,7 @@ jobs:
           PATH=$PATH:/usr/local/go/bin:/root/go/bin
           GOPROXY=direct
           sam build --template ${SAM_TEMPLATE}
-          
+
       - name: Assume the testing pipeline user role
         uses: aws-actions/configure-aws-credentials@v1-node16
         with:
