@@ -1,0 +1,44 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  go-sam-pipes-goodbye-service
+
+  Demo SAM Pipelines
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 5
+    MemorySize: 128
+
+Resources:
+  GoodbyeWorldFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Metadata:
+      BuildMethod: go1.x
+    Properties:
+      CodeUri: cmd/functions/goodbye/
+      Handler: bootstrap
+      Runtime: provided.al2
+      Architectures:
+      - arm64
+      Events:
+        CatchAll:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /goodbye
+            Method: GET
+      Environment: # More info about Env Vars: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#environment-object
+        Variables:
+          PARAM1: VALUE
+
+Outputs:
+  GoodbyeWorldAPI:
+    Description: API Gateway endpoint URL for Prod environment for Goodbye Function
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/goodbye/"
+  GoodbyeWorldFunction:
+    Description: Goodbye Lambda Function ARN
+    Value: !GetAtt GoodbyeWorldFunction.Arn
+  GoodbyeWorldFunctionIamRole:
+    Description: Implicit IAM Role created for Goodbye World function
+    Value: !GetAtt GoodbyeWorldFunctionRole.Arn
