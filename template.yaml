@@ -66,7 +66,7 @@ Outputs:
     Value: !GetAtt HelloWorldFunctionRole.Arn
   GoodbyeWorldAPI:
     Description: API Gateway endpoint URL for Prod environment for Goodbye Function
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/goodbye/"
   GoodbyeWorldFunction:
     Description: Goodbye Lambda Function ARN
     Value: !GetAtt GoodbyeWorldFunction.Arn
